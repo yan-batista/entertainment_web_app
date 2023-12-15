@@ -5,7 +5,7 @@ function App() {
   return (
     <>
       <Nav />
-      <section className="w-full p-4">
+      <section className="w-full my-7">
         <SearchBar />
       </section>
     </>

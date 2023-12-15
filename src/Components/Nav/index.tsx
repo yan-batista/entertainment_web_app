@@ -4,7 +4,7 @@ import Avatar from "../../assets/image-avatar.png";
 const Nav = () => {
   return (
     <nav
-      className="flex flex-row items-center justify-between bg-side p-4
+      className="flex flex-row items-center justify-between bg-side p-6 lg:p-7
     md:rounded-2xl
     lg:flex-col lg:justify-start lg:w-fit lg:h-full"
     >

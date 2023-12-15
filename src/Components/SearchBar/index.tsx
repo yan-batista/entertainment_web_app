@@ -1,13 +1,15 @@
 import { useState } from "react";
-import { SearchIcon } from "../Icon/Icons";
+import { CloseIcon, SearchIcon } from "../Icon/Icons";
 
 const SearchBar = () => {
   const [searchBarInput, setSearchBarInput] = useState("");
 
+  // saves search bar state
   function onChangeSetSearchBarInput(event: React.ChangeEvent<HTMLInputElement>) {
     setSearchBarInput(event.currentTarget.value);
   }
 
+  // click the clear search bar input button
   function onButtonClickClearSeachBarInput() {
     // clear state
     setSearchBarInput("");
@@ -27,15 +29,15 @@ const SearchBar = () => {
         type="text"
         name="media_name_search"
         id="media_name_search"
-        className="bg-transparent border-b border-bg focus:border-b focus:border-icon outline-none  w-full py-2 font-light"
+        className="bg-transparent border-b border-bg focus:border-b focus:border-icon outline-none w-full py-2 font-light md:text-2xl"
         placeholder="Search for movies or TV Series"
         defaultValue={searchBarInput}
         onChange={onChangeSetSearchBarInput}
       />
       {searchBarInput.length > 0 && (
-        <span className="absolute right-0" onClick={onButtonClickClearSeachBarInput}>
-          X
-        </span>
+        <div className="absolute right-0" onClick={onButtonClickClearSeachBarInput}>
+          <CloseIcon />
+        </div>
       )}
     </div>
   );
