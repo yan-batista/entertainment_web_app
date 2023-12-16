@@ -4,3 +4,5 @@ export { MovieIcon } from "./MovieIcon";
 export { TVIcon } from "./TVIcon";
 export { SearchIcon } from "./SearchIcon";
 export { CloseIcon } from "./CloseIcon";
+export { BookmarkIcon } from "./BookmarkIcon";
+export { BookmarkIconActive } from "./BookmarkIconActive";
