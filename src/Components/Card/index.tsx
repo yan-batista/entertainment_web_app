@@ -3,8 +3,8 @@ import { CardProps } from "../../types/CardType";
 
 const Card: React.FC<CardProps> = ({ image, date, type, advisory_rating, name }: CardProps) => {
   return (
-    <div className="rounded-xl w-60 h-36 overflow-hidden relative">
-      <img src={image} className="rounded-lg w-full h-full" />
+    <div className="rounded-xl min-w-[15rem] min-h-[8rem] overflow-hidden relative">
+      <img src={image} className="rounded-lg w-full h-full object-cover" />
       <div
         id="overlay"
         className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-transparent to-black/70"
