@@ -9,4 +9,5 @@ export interface CardProps {
   type: Media;
   advisory_rating: string;
   name: string;
+  trending?: boolean;
 }

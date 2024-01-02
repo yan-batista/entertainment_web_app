@@ -6,7 +6,7 @@ interface CarrouselProps {
 
 const Carrousel: React.FC<CarrouselProps> = ({ children }: CarrouselProps) => {
   return (
-    <div id="carrousel" className="w-full h-44 overflow-x-scroll flex flex-row gap-4 pb-6 px-5">
+    <div id="carrousel" className="w-full h-[150px] overflow-x-scroll flex flex-row gap-4">
       {children}
     </div>
   );
