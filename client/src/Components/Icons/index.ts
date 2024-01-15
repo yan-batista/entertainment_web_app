@@ -1,0 +1,9 @@
+export { LogoIcon } from "./LogoIcon";
+export { GridIcon } from "./GridIcon";
+export { MovieIcon } from "./MovieIcon";
+export { TVIcon } from "./TVIcon";
+export { SearchIcon } from "./SearchIcon";
+export { CloseIcon } from "./CloseIcon";
+export { BookmarkIcon } from "./BookmarkIcon";
+export { BookmarkIconActive } from "./BookmarkIconActive";
+export { PlayIcon } from "./PlayIcon";
