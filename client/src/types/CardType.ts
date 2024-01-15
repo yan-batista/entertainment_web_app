@@ -14,20 +14,20 @@ export interface CardProps {
 
 export interface CardType {
   title: string;
-  thumbnail: {
-    regular: {
-      small: string;
-      medium: string;
-      large: string;
+  "thumbnail": {
+    "regular": {
+      "small": string;
+      "medium": string;
+      "large": string;
     };
-    trending?: {
-      small: string;
-      large: string;
+    "trending"?: {
+      "small": string;
+      "large": string;
     };
   };
-  year: number;
-  category: string;
-  rating: string;
-  isBookmarked: boolean;
-  isTrending: boolean;
+  "year": number;
+  "category": string;
+  "rating": string;
+  "isBookmarked": boolean;
+  "isTrending": boolean;
 }
