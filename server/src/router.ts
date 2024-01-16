@@ -5,7 +5,7 @@ const router = Router();
 
 // routes
 // root -- get all movies and series
-router.get("/", async (request: Request, response: Response) => {
+router.get("/api/", async (request: Request, response: Response) => {
   return mediaController.getAllMedia(request, response);
 });
 
