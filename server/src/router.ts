@@ -1,14 +1,12 @@
 import { Request, Response, Router } from "express";
-import getSupabaseConnection from "./database/config";
+import mediaController from "./controllers/MediaController";
 
 const router = Router();
 
 // routes
-// root
+// root -- get all movies and series
 router.get("/", async (request: Request, response: Response) => {
-  // get test
-  const { data, error } = await getSupabaseConnection().from("Media").select();
-  response.send(data);
+  return mediaController.getAllMedia(request, response);
 });
 
 export default router;

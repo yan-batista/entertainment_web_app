@@ -29,9 +29,12 @@ const seed_database = async () => {
   // seed the database
   // gets data, filters it by removing thumbnail and isBookmard, and created a new array with just the other data
   const formattedData = (data as Media[]).map(({ thumbnail, isBookmarked, ...rest }: Media) => {
+    const title = rest.title.replace(/\s/g, "-");
+
     const { data } = getSupabaseConnection()
       .storage.from("EntertainmentWebApp")
-      .getPublicUrl(`thumbnails/${rest.title}/${rest.isTrending ? "trending" : "regular"}/large.jpg`);
+      .getPublicUrl(`thumbnails/${title.toLowerCase()}/${rest.isTrending ? "trending" : "regular"}/large.jpg`);
+
     return {
       ...rest,
       imageURL: data.publicUrl,
