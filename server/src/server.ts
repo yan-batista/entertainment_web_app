@@ -6,7 +6,7 @@ import router from "./router";
 // Server Configuration
 dotenv.config();
 //seed_database();
-const port = process.env.PORT;
+const port = process.env.PORT || 3000;
 
 // Server
 const app: Express = express();
