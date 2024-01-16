@@ -14,7 +14,7 @@ export const SeriesPage = () => {
    * @return {CardType[]} (all objects that have category as "TV Series")
    */
   function getAllSeries(): CardType[] {
-    const series = data.filter((item) => item."category" === "TV Series");
+    const series = data.filter((item) => item.category === "TV Series");
     return series.sort((a, b) => a.title.localeCompare(b.title));
   }
 

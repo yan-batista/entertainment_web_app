@@ -14,7 +14,7 @@ export const MoviesPage = () => {
    * @return {CardType[]} (all objects that have category as "Movie")
    */
   function getAllMovies(): CardType[] {
-    const movies = data.filter((item) => item."category" === "Movie");
+    const movies = data.filter((item) => item.category === "Movie");
     return movies.sort((a, b) => a.title.localeCompare(b.title));
   }
 
