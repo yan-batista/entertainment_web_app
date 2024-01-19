@@ -14,8 +14,11 @@ const Card: React.FC<CardProps> = ({ image, year, type, advisory_rating, name, t
     setBookmarked((prevState) => !prevState);
   }
 
-  function capitalize(text: string): string {
-    return text.charAt(0).toUpperCase() + text.slice(1);
+  function capitalizeWords(str: string): string {
+    return str
+      .split(" ")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+      .join(" ");
   }
 
   return (
@@ -58,13 +61,13 @@ const Card: React.FC<CardProps> = ({ image, year, type, advisory_rating, name, t
             ) : (
               <TVIcon className="w-3 h-3 fill-zinc-300" />
             )}
-            {capitalize(type).replace(/-/g, " ")}
+            {capitalizeWords(type).replace(/-/g, " ")}
           </p>
           <span>•</span>
-          <p id="media-age">{advisory_rating}</p>
+          <p id="media-age">{advisory_rating.toUpperCase()}</p>
         </div>
         <p id="media-name" className="font-bold max-w-full flex flex-wrap whitespace-normal md:text-2xl md:font-normal">
-          {name}
+          {capitalizeWords(name)}
         </p>
       </div>
 
