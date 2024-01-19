@@ -37,7 +37,7 @@ export const HomePage = () => {
         return (
           <Card
             key={`${item.title}_$${index}`}
-            image={item.imageURL}
+            image={item.trendingImageURL}
             year={item.year}
             type={item.category}
             advisory_rating={item.rating}
@@ -62,7 +62,7 @@ export const HomePage = () => {
         return (
           <Card
             key={`${item.title}_$${index}`}
-            image={item.imageURL}
+            image={item.regularImageURL}
             year={item.year}
             type={item.category}
             advisory_rating={item.rating}

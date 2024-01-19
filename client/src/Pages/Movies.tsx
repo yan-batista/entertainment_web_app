@@ -32,7 +32,7 @@ export const MoviesPage = () => {
           return (
             <Card
               key={item.title}
-              image={item.imageURL}
+              image={item.regularImageURL}
               year={item.year}
               type={item.category}
               advisory_rating={item.rating}
