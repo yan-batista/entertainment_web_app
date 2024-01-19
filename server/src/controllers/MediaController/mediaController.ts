@@ -30,6 +30,18 @@ class MediaController {
       console.log(error);
     }
   }
+
+  async getMediaByName(request: Request, response: Response) {
+    const title: string = request.query.title as string;
+    const type: string | undefined = request.query.type as string | undefined;
+
+    try {
+      const res = await this.mediaService.getMediaByName(title, type);
+      return response.json(res);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }
 
 export default MediaController;

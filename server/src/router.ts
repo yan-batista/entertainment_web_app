@@ -19,4 +19,9 @@ router.get("/api/series", async (request: Request, response: Response) => {
   return mediaController.getAllSeries(request, response);
 });
 
+// get media by name
+router.get("/api/search", async (request: Request, response: Response) => {
+  return mediaController.getMediaByName(request, response);
+});
+
 export default router;

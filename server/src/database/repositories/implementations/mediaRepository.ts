@@ -17,8 +17,18 @@ class MediaRepository implements IMediaRepository {
     return data;
   }
 
-  getMediaByName(name: string, type?: string): Promise<MediaEntity> {
-    throw new Error("Method not implemented.");
+  async getMediaByName(name: string, type?: string): Promise<MediaEntity[] | null> {
+    let data, error;
+
+    if (type !== undefined) {
+      ({ data, error } = await this.client.from("Media").select().ilike("title", `%${name}%`).eq("category", type));
+    } else {
+      ({ data, error } = await this.client.from("Media").select().ilike("title", `%${name}%`));
+    }
+
+    if (error) throw new Error(error.message);
+
+    return data;
   }
 
   async getAllMovies(): Promise<MediaEntity[]> {

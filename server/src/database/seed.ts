@@ -41,6 +41,9 @@ const seed_database = async () => {
 
     return {
       ...rest,
+      title: rest.title.toLocaleLowerCase(),
+      category: rest.category.toLocaleLowerCase().replace(/\s/g, "-"),
+      rating: rest.rating.toLocaleLowerCase(),
       trendingImageURL: getImageUrl("trending").publicUrl,
       regularImageURL: getImageUrl("regular").publicUrl,
     };

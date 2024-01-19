@@ -26,6 +26,14 @@ class MediaService {
       console.log(`Error fetching series: ${error}`);
     }
   }
+
+  async getMediaByName(name: string, type?: string) {
+    try {
+      return await this.mediaRepository.getMediaByName(name, type);
+    } catch (error) {
+      console.log(`Error fetching media by name: ${error}`);
+    }
+  }
 }
 
 export default MediaService;
