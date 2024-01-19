@@ -37,9 +37,7 @@ export async function getMediaByName(title: string, category?: string) {
     if (category) {
       route += `&category=${category}`;
     }
-    console.log(route);
     const resp = await api.get(route);
-    console.log(resp.data);
     return resp.data;
   } catch (error) {
     console.error(error);
