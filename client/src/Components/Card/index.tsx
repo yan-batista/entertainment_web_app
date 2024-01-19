@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { CardProps } from "../../types/CardProps";
+import { CardProps } from "../../types/CardType";
 import { BookmarkIcon, BookmarkIconActive, MovieIcon, PlayIcon, TVIcon } from "../Icons";
 
 const Card: React.FC<CardProps> = ({ image, year, type, advisory_rating, name, trending = false }: CardProps) => {

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Card from "../Components/Card";
 import SearchBar from "../Components/SearchBar";
 import { getAllMovies } from "../services/mediaRequests";
-import { MediaEntity } from "../types/CardProps";
+import { MediaEntity } from "../types/CardType";
 
 export const MoviesPage = () => {
   const [movies, setMovies] = useState<MediaEntity[]>([]);

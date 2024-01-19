@@ -1,6 +1,4 @@
-import { CardType } from "./types/CardProps";
-
-export const data: CardType[] = [
+export const data = [
   {
     title: "Beyond Earth",
     thumbnail: {
