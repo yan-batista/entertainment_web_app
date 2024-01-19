@@ -14,6 +14,10 @@ const Card: React.FC<CardProps> = ({ image, year, type, advisory_rating, name, t
     setBookmarked((prevState) => !prevState);
   }
 
+  function capitalize(text: string): string {
+    return text.charAt(0).toUpperCase() + text.slice(1);
+  }
+
   return (
     <div className={`relative ${getCardSize()} h-fit flex-grow cursor-pointer group/play select-none`}>
       <div className={`rounded-xl overflow-hidden relative ${trending ? getCardSize() : "w-full h-full"}`}>
@@ -54,7 +58,7 @@ const Card: React.FC<CardProps> = ({ image, year, type, advisory_rating, name, t
             ) : (
               <TVIcon className="w-3 h-3 fill-zinc-300" />
             )}
-            {type}
+            {capitalize(type).replace(/-/g, " ")}
           </p>
           <span>•</span>
           <p id="media-age">{advisory_rating}</p>
