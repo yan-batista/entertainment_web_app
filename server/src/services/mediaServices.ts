@@ -10,6 +10,22 @@ class MediaService {
       console.log(`Error fetching all media: ${error}`);
     }
   }
+
+  async getAllMovies() {
+    try {
+      return await this.mediaRepository.getAllMovies();
+    } catch (error) {
+      console.log(`Error fetching movies: ${error}`);
+    }
+  }
+
+  async getAllSeries() {
+    try {
+      return await this.mediaRepository.getAllSeries();
+    } catch (error) {
+      console.log(`Error fetching series: ${error}`);
+    }
+  }
 }
 
 export default MediaService;

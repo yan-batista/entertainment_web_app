@@ -21,11 +21,16 @@ class MediaRepository implements IMediaRepository {
     throw new Error("Method not implemented.");
   }
 
-  getAllMovies(): Promise<MediaEntity[]> {
-    throw new Error("Method not implemented.");
+  async getAllMovies(): Promise<MediaEntity[]> {
+    const { data, error } = await this.client.from("Media").select().eq("category", "Movie");
+    if (error) throw new Error(error.message);
+    return data;
   }
-  getAllSeries(): Promise<MediaEntity[]> {
-    throw new Error("Method not implemented.");
+
+  async getAllSeries(): Promise<MediaEntity[]> {
+    const { data, error } = await this.client.from("Media").select().eq("category", "TV Series");
+    if (error) throw new Error(error.message);
+    return data;
   }
 }
 

@@ -9,3 +9,23 @@ export async function getAllMediaApi() {
     console.error(error);
   }
 }
+
+// Get all movies function
+export async function getAllMovies() {
+  try {
+    const resp = await api.get("/movies");
+    return resp.data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+// Get all series function
+export async function getAllSeries() {
+  try {
+    const resp = await api.get("/series");
+    return resp.data;
+  } catch (error) {
+    console.error(error);
+  }
+}

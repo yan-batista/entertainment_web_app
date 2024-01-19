@@ -1,22 +1,27 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Card from "../Components/Card";
 import SearchBar from "../Components/SearchBar";
-import { data } from "../data";
-import { CardType } from "../types/CardType";
+import { getAllSeries } from "../services/mediaRequests";
+import { MediaEntity } from "../types/CardType";
 
 export const SeriesPage = () => {
-  const [series, _] = useState<CardType[]>(getAllSeries);
+  const [series, setSeries] = useState<MediaEntity[]>([]);
 
   /*
    * This function will filter the data, getting only objects that
    * has category as "TV Series" and returning them as an array
    *
-   * @return {CardType[]} (all objects that have category as "TV Series")
+   * @return {MediaEntity[]} (all objects that have category as "TV Series")
    */
-  function getAllSeries(): CardType[] {
-    const series = data.filter((item) => item.category === "TV Series");
-    return series.sort((a, b) => a.title.localeCompare(b.title));
-  }
+  useEffect(() => {
+    const fetchData = async () => {
+      const data: MediaEntity[] = await getAllSeries();
+      const sortedData = data.sort((a, b) => a.title.localeCompare(b.title));
+      setSeries(sortedData);
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <section className="flex-grow mx-4 pt-8 md:mx-1 lg:ml-6">
@@ -27,7 +32,7 @@ export const SeriesPage = () => {
           return (
             <Card
               key={item.title}
-              image={item.thumbnail.regular.medium}
+              image={item.imageURL}
               year={item.year}
               type={item.category}
               advisory_rating={item.rating}

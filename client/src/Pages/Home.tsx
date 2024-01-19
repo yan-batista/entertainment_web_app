@@ -3,7 +3,6 @@ import Card from "../Components/Card";
 import Carrousel from "../Components/Carrousel";
 import SearchBar from "../Components/SearchBar";
 
-//import { data } from "../data";
 import { getAllMediaApi } from "../services/mediaRequests";
 import { MediaEntity } from "../types/CardType";
 
@@ -17,9 +16,9 @@ export const HomePage = () => {
    */
   useEffect(() => {
     const fetchMedia = async () => {
-      const mediaA: MediaEntity[] = await getAllMediaApi();
-      const sortedMedia = mediaA.sort((a, b) => a.title.localeCompare(b.title));
-      setMedia(sortedMedia);
+      const data: MediaEntity[] = await getAllMediaApi();
+      const sortedData = data.sort((a, b) => a.title.localeCompare(b.title));
+      setMedia(sortedData);
     };
 
     fetchMedia();
