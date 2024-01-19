@@ -1,12 +1,15 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { CloseIcon, SearchIcon } from "../Icons";
 
 interface SearchBarProps {
   placeholder: string;
+  filterType?: string;
 }
 
-const SearchBar: React.FC<SearchBarProps> = ({ placeholder }: SearchBarProps) => {
+const SearchBar: React.FC<SearchBarProps> = ({ placeholder, filterType }: SearchBarProps) => {
   const [searchBarInput, setSearchBarInput] = useState("");
+  const navigate = useNavigate();
 
   // saves search bar state
   function onChangeSetSearchBarInput(event: React.ChangeEvent<HTMLInputElement>) {
@@ -26,8 +29,28 @@ const SearchBar: React.FC<SearchBarProps> = ({ placeholder }: SearchBarProps) =>
     }
   }
 
+  /**
+   * Get the event and possible category (movie, tv-series or empty)
+   * and redirects to the search page route with query params
+   */
+  function onSubmitSearchMedia(event: React.FormEvent<HTMLFormElement>, category: string | undefined) {
+    event.preventDefault();
+    const input: HTMLInputElement | null = event.currentTarget.querySelector("#media_name_search");
+    if (input) {
+      let route = `/search?title=${input.value}`;
+      if (category) {
+        route += `&category=${category}`;
+      }
+
+      navigate(route);
+    }
+  }
+
   return (
-    <div className="flex flex-row items-center w-full gap-4 relative">
+    <form
+      className="flex flex-row items-center w-full gap-4 relative"
+      onSubmit={(event) => onSubmitSearchMedia(event, filterType)}
+    >
       <SearchIcon className="w-6 h-6" viewbox={"0 0 32 32"} fill="white" />
       <input
         type="text"
@@ -48,7 +71,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ placeholder }: SearchBarProps) =>
           />
         </div>
       )}
-    </div>
+    </form>
   );
 };
 

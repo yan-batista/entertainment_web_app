@@ -33,10 +33,10 @@ class MediaController {
 
   async getMediaByName(request: Request, response: Response) {
     const title: string = request.query.title as string;
-    const type: string | undefined = request.query.type as string | undefined;
+    const category: string | undefined = request.query.category as string | undefined;
 
     try {
-      const res = await this.mediaService.getMediaByName(title, type);
+      const res = await this.mediaService.getMediaByName(title, category);
       return response.json(res);
     } catch (error) {
       console.log(error);

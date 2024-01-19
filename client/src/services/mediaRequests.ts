@@ -29,3 +29,19 @@ export async function getAllSeries() {
     console.error(error);
   }
 }
+
+// Get all movie/series by name
+export async function getMediaByName(title: string, category?: string) {
+  try {
+    let route = `/search?title=${title}`;
+    if (category) {
+      route += `&category=${category}`;
+    }
+    console.log(route);
+    const resp = await api.get(route);
+    console.log(resp.data);
+    return resp.data;
+  } catch (error) {
+    console.error(error);
+  }
+}

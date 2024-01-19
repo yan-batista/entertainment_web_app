@@ -25,7 +25,7 @@ export const MoviesPage = () => {
 
   return (
     <section className="flex-grow mx-4 pt-8 md:mx-1 lg:ml-6">
-      <SearchBar placeholder="Search for movies" />
+      <SearchBar placeholder="Search for movies" filterType="movie" />
       <h1 className="text-xl font-light my-6 md:text-3xl">Movies</h1>
       <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
         {movies.map((item) => {

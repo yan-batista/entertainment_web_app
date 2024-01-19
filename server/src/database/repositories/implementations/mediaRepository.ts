@@ -32,13 +32,13 @@ class MediaRepository implements IMediaRepository {
   }
 
   async getAllMovies(): Promise<MediaEntity[]> {
-    const { data, error } = await this.client.from("Media").select().eq("category", "Movie");
+    const { data, error } = await this.client.from("Media").select().eq("category", "movie");
     if (error) throw new Error(error.message);
     return data;
   }
 
   async getAllSeries(): Promise<MediaEntity[]> {
-    const { data, error } = await this.client.from("Media").select().eq("category", "TV Series");
+    const { data, error } = await this.client.from("Media").select().eq("category", "tv-series");
     if (error) throw new Error(error.message);
     return data;
   }
