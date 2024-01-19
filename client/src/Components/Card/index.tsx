@@ -1,26 +1,12 @@
 import { useState } from "react";
-import { CardProps } from "../../types/CardType";
-import {
-  BookmarkIcon,
-  BookmarkIconActive,
-  MovieIcon,
-  PlayIcon,
-  TVIcon,
-} from "../Icons";
+import { CardProps } from "../../types/CardProps";
+import { BookmarkIcon, BookmarkIconActive, MovieIcon, PlayIcon, TVIcon } from "../Icons";
 
-const Card: React.FC<CardProps> = ({
-  image,
-  year,
-  type,
-  advisory_rating,
-  name,
-  trending = false,
-}: CardProps) => {
+const Card: React.FC<CardProps> = ({ image, year, type, advisory_rating, name, trending = false }: CardProps) => {
   const [bookmarked, setBookmarked] = useState<boolean>(false);
 
   const getCardSize = () => {
-    if (trending)
-      return "w-[15rem] h-[8rem] mobile-l:w-[24rem] mobile-l:h-[12rem] md:w-[30rem] md:h-[15rem]";
+    if (trending) return "w-[15rem] h-[8rem] mobile-l:w-[24rem] mobile-l:h-[12rem] md:w-[30rem] md:h-[15rem]";
     else return "w-full/2";
   };
 
@@ -29,12 +15,8 @@ const Card: React.FC<CardProps> = ({
   }
 
   return (
-    <div
-      className={`relative ${getCardSize()} h-fit flex-grow cursor-pointer group/play select-none`}
-    >
-      <div
-        className={`rounded-xl overflow-hidden relative ${trending ? getCardSize() : "w-full h-full"}`}
-      >
+    <div className={`relative ${getCardSize()} h-fit flex-grow cursor-pointer group/play select-none`}>
+      <div className={`rounded-xl overflow-hidden relative ${trending ? getCardSize() : "w-full h-full"}`}>
         <img src={image} className="rounded-lg w-full h-full object-cover" />
         <div
           id="overlay"
@@ -77,10 +59,7 @@ const Card: React.FC<CardProps> = ({
           <span>•</span>
           <p id="media-age">{advisory_rating}</p>
         </div>
-        <p
-          id="media-name"
-          className="font-bold max-w-full flex flex-wrap whitespace-normal md:text-2xl md:font-normal"
-        >
+        <p id="media-name" className="font-bold max-w-full flex flex-wrap whitespace-normal md:text-2xl md:font-normal">
           {name}
         </p>
       </div>
@@ -88,16 +67,11 @@ const Card: React.FC<CardProps> = ({
       <div
         id="play_button"
         className={`flex flex-row items-center gap-3 bg-zinc-400/60 rounded-full w-fit p-2 absolute ${
-          trending
-            ? "top-1/2 left-1/2"
-            : "top-1/3 left-1/2 md:top-[35%] lg:top-[40%]"
+          trending ? "top-1/2 left-1/2" : "top-1/3 left-1/2 md:top-[35%] lg:top-[40%]"
         } -translate-x-1/2 -translate-y-1/2 opacity-0 transition-opacity group-hover/play:opacity-100 duration-[400ms]
 md:gap-6 md:p-3`}
       >
-        <PlayIcon
-          className="w-5 h-5 fill-white cursor-pointer mobile-l:w-7 mobile-l:h-7"
-          viewbox="0 0 30 30"
-        />
+        <PlayIcon className="w-5 h-5 fill-white cursor-pointer mobile-l:w-7 mobile-l:h-7" viewbox="0 0 30 30" />
         <p>Play</p>
       </div>
     </div>

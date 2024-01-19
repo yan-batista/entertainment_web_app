@@ -4,7 +4,7 @@ import Carrousel from "../Components/Carrousel";
 import SearchBar from "../Components/SearchBar";
 
 import { getAllMediaApi } from "../services/mediaRequests";
-import { MediaEntity } from "../types/CardType";
+import { MediaEntity } from "../types/CardProps";
 
 export const HomePage = () => {
   const [media, setMedia] = useState<MediaEntity[]>([]);
