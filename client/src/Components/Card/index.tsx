@@ -61,7 +61,7 @@ const Card: React.FC<CardProps> = ({ image, year, type, advisory_rating, name, t
             ) : (
               <TVIcon className="w-3 h-3 fill-zinc-300" />
             )}
-            {capitalizeWords(type).replace(/-/g, " ")}
+            {capitalizeWords(type.replace(/-/g, " "))}
           </p>
           <span>•</span>
           <p id="media-age">{advisory_rating.toUpperCase()}</p>
