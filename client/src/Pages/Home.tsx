@@ -1,22 +1,29 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Card from "../Components/Card";
 import Carrousel from "../Components/Carrousel";
 import SearchBar from "../Components/SearchBar";
 
-import { data } from "../data";
-import { CardType } from "../types/CardType";
+//import { data } from "../data";
+import { getAllMediaApi } from "../services/mediaRequests";
+import { MediaEntity } from "../types/CardType";
 
 export const HomePage = () => {
-  const [media, _] = useState<CardType[]>(getAllMedia);
+  const [media, setMedia] = useState<MediaEntity[]>([]);
 
   /*
    * This function will get all the movies/series sorted by title.
    *
-   * @return {CardType[]} (sorted array of movies/series)
+   * @return {MediaEntity[]} (sorted array of movies/series)
    */
-  function getAllMedia() {
-    return data.sort((a, b) => a.title.localeCompare(b.title));
-  }
+  useEffect(() => {
+    const fetchMedia = async () => {
+      const mediaA: MediaEntity[] = await getAllMediaApi();
+      const sortedMedia = mediaA.sort((a, b) => a.title.localeCompare(b.title));
+      setMedia(sortedMedia);
+    };
+
+    fetchMedia();
+  }, []);
 
   /*
    * This function map through all sorted movies saved on state
@@ -31,7 +38,7 @@ export const HomePage = () => {
         return (
           <Card
             key={`${item.title}_$${index}`}
-            image={item.thumbnail.trending!.large}
+            image={item.imageURL}
             year={item.year}
             type={item.category}
             advisory_rating={item.rating}
@@ -56,7 +63,7 @@ export const HomePage = () => {
         return (
           <Card
             key={`${item.title}_$${index}`}
-            image={item.thumbnail.regular.medium}
+            image={item.imageURL}
             year={item.year}
             type={item.category}
             advisory_rating={item.rating}

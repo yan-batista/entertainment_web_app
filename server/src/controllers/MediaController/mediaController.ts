@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import MediaService from "../../services/MediaServices";
+import MediaService from "../../services/mediaServices";
 
 class MediaController {
   constructor(private mediaService: MediaService) {}
