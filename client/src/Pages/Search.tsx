@@ -30,7 +30,7 @@ const SearchPage = () => {
     };
 
     fetchData();
-  }, []);
+  }, [searchParams]);
 
   return (
     <section className="flex-grow mx-4 pt-8 md:mx-1 lg:ml-6">
