@@ -1,5 +1,7 @@
+import bcrypt from "bcrypt";
 import { Request, Response, Router } from "express";
 import mediaController from "./controllers/MediaController";
+import userController from "./controllers/UserController";
 
 const router = Router();
 
@@ -22,6 +24,12 @@ router.get("/api/series", async (request: Request, response: Response) => {
 // get media by name
 router.get("/api/search", async (request: Request, response: Response) => {
   return mediaController.getMediaByName(request, response);
+});
+
+// Users
+// sign up
+router.post("/signup", async (request: Request, response: Response) => {
+  return userController.signup(request, response);
 });
 
 export default router;

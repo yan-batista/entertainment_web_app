@@ -6,7 +6,7 @@ const LoginPage = () => {
     <section className="w-full h-full flex flex-col items-center justify-center gap-9">
       <LogoIcon className="w-8 h-8 fill-logo lg:w-8 lg:h-8" viewbox={"0 0 33 27"} />
       <div className="bg-side rounded-md p-6 flex flex-col items-center">
-        <h1 className="text-xl w-full text-left">Login</h1>
+        <h1 className="text-xl w-full text-left md:text-3xl">Login</h1>
         <form className="flex flex-col gap-4 mt-4">
           <input
             type="text"
