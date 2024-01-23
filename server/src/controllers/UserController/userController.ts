@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { UserEntityDTO } from "../../database/entities/userEntity";
+import { UserEntity, UserEntityDTO } from "../../database/entities/userEntity";
 import UserService from "../../services/userService";
 
 class UserController {
@@ -20,6 +20,23 @@ class UserController {
     } catch (error) {
       console.log(error);
       return response.status(500);
+    }
+  }
+
+  async login(request: Request, response: Response) {
+    const { email, password } = request.body;
+
+    const user: UserEntity = {
+      email: email,
+      password: password,
+    };
+
+    try {
+      const token = await this.userService.login(user);
+      return response.json(token);
+    } catch (error) {
+      console.log(error);
+      return response.status(500).send();
     }
   }
 }

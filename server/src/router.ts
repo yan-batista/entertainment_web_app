@@ -2,6 +2,7 @@ import bcrypt from "bcrypt";
 import { Request, Response, Router } from "express";
 import mediaController from "./controllers/MediaController";
 import userController from "./controllers/UserController";
+import { ensureAuthenticated } from "./middlewares/ensureAuthenticated";
 
 const router = Router();
 
@@ -30,6 +31,17 @@ router.get("/api/search", async (request: Request, response: Response) => {
 // sign up
 router.post("/signup", async (request: Request, response: Response) => {
   return userController.signup(request, response);
+});
+
+// login
+router.post("/login", async (request: Request, response: Response) => {
+  return userController.login(request, response);
+});
+
+router.get("/test", ensureAuthenticated, async (req: Request, res: Response) => {
+  console.log("reached");
+  console.log(req.email);
+  return res.status(200).send("success");
 });
 
 export default router;
