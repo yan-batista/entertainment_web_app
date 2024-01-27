@@ -12,7 +12,9 @@ export async function loginService(user_email: string, user_password: string, se
     if (decoded && decoded.exp) {
       setCookie("jwt", resp.data, { path: "/", expires: new Date(decoded.exp * 1000) });
     }
-  } catch (error) {
-    console.log(error);
+  } catch (error: any) {
+    if (error.response) {
+      throw new Error(error.response.data.error);
+    }
   }
 }
