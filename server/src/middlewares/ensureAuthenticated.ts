@@ -13,11 +13,11 @@ interface IPayload {
  * @returns
  */
 export function ensureAuthenticated(request: Request, response: Response, next: NextFunction) {
-  const authToken = request.headers.authorization;
+  const authToken = request.cookies.jwtToken;
   if (!authToken) return response.status(401).end();
 
   // Token string structure is "Bearer token", so it separates them
-  const [, token] = authToken.split(" ");
+  //const [, token] = authToken.split(" ");
 
   try {
     // Gets the token secret from .env
@@ -32,7 +32,7 @@ export function ensureAuthenticated(request: Request, response: Response, next: 
      * to include whatever you are trying to add to the request. In this case
      * it's the user email
      */
-    const { sub } = verify(token, secret) as IPayload;
+    const { sub } = verify(authToken, secret) as IPayload;
     request.email = sub;
 
     // goes to the next function, in this case, the (req, res) from the router

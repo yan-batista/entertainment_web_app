@@ -29,6 +29,7 @@ router.get("/api/search", async (request: Request, response: Response, next: Nex
 // Users
 // sign up
 router.post("/api/signup", async (request: Request, response: Response, next: NextFunction) => {
+  const token = userController.signup(request, response, next);
   return userController.signup(request, response, next);
 });
 
@@ -37,7 +38,7 @@ router.post("/api/login", async (request: Request, response: Response, next: Nex
   return userController.login(request, response, next);
 });
 
-router.get("/test", ensureAuthenticated, async (req: Request, res: Response) => {
+router.get("/api/auth", ensureAuthenticated, async (req: Request, res: Response) => {
   console.log("reached");
   console.log(req.email);
   return res.status(200).send("success");

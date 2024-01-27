@@ -6,7 +6,7 @@ import SearchBar from "../Components/SearchBar";
 import { getAllMediaApi } from "../services/mediaRequests";
 import { MediaEntity } from "../types/CardType";
 
-export const HomePage = () => {
+const HomePage = () => {
   const [media, setMedia] = useState<MediaEntity[]>([]);
 
   /*
@@ -93,3 +93,5 @@ export const HomePage = () => {
     </>
   );
 };
+
+export default HomePage;

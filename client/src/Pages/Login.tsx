@@ -3,16 +3,16 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { LogoIcon } from "../Components/Icons";
 import { loginService } from "../services/userRequests";
 
-interface LoginPageProps {
+/* interface LoginPageProps {
   setCookie: any;
-}
+} */
 
 interface LoginPageError {
   message: string;
   exists: boolean;
 }
 
-const LoginPage: React.FC<LoginPageProps> = ({ setCookie }: LoginPageProps) => {
+const LoginPage: React.FC /* <LoginPageProps> */ = (/* { setCookie }: LoginPageProps */) => {
   const navigate = useNavigate();
   const [error, setError] = useState<LoginPageError>({ message: "", exists: false });
 
@@ -27,7 +27,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ setCookie }: LoginPageProps) => {
 
     if (user_email && user_password) {
       try {
-        await loginService(user_email.value, user_password.value, setCookie);
+        await loginService(user_email.value, user_password.value /* , setCookie */);
         navigate("/");
       } catch (error: any) {
         setError({

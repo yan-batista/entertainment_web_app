@@ -4,7 +4,7 @@ import SearchBar from "../Components/SearchBar";
 import { getAllSeries } from "../services/mediaRequests";
 import { MediaEntity } from "../types/CardType";
 
-export const SeriesPage = () => {
+const SeriesPage = () => {
   const [series, setSeries] = useState<MediaEntity[]>([]);
 
   /*
@@ -44,3 +44,5 @@ export const SeriesPage = () => {
     </section>
   );
 };
+
+export default SeriesPage;

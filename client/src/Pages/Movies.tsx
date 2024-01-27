@@ -4,7 +4,7 @@ import SearchBar from "../Components/SearchBar";
 import { getAllMovies } from "../services/mediaRequests";
 import { MediaEntity } from "../types/CardType";
 
-export const MoviesPage = () => {
+const MoviesPage = () => {
   const [movies, setMovies] = useState<MediaEntity[]>([]);
 
   /*
@@ -44,3 +44,5 @@ export const MoviesPage = () => {
     </section>
   );
 };
+
+export default MoviesPage;
