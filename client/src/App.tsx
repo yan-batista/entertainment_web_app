@@ -1,3 +1,4 @@
+import { useCookies } from "react-cookie";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Nav from "./Components/Nav";
 import { HomePage } from "./Pages/Home";
@@ -8,6 +9,8 @@ import { SeriesPage } from "./Pages/Series";
 import SignUpPage from "./Pages/SignUp";
 
 function App() {
+  const [cookies, setCookie] = useCookies(["jwt"]);
+
   return (
     <>
       <Router>
@@ -19,7 +22,7 @@ function App() {
             <Route path="/search" element={<SearchPage />} />
           </Route>
           <Route>
-            <Route path="/login" element={<LoginPage />} />
+            <Route path="/login" element={<LoginPage setCookie={setCookie} />} />
             <Route path="/signup" element={<SignUpPage />} />
           </Route>
         </Routes>
