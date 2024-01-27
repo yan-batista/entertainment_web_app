@@ -16,9 +16,6 @@ export function ensureAuthenticated(request: Request, response: Response, next: 
   const authToken = request.cookies.jwtToken;
   if (!authToken) return response.status(401).end();
 
-  // Token string structure is "Bearer token", so it separates them
-  //const [, token] = authToken.split(" ");
-
   try {
     // Gets the token secret from .env
     const secret: string | undefined = process.env.JWTSECRET;

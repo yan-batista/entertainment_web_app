@@ -33,7 +33,6 @@ class UserController {
 
     try {
       const token = await this.userService.login(user);
-      /* return response.json(token); */
       response.status(200).cookie("jwtToken", token, { httpOnly: true, secure: false }).send();
     } catch (error) {
       console.log(error);
