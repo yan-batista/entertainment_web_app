@@ -39,6 +39,10 @@ class UserController {
       next(error);
     }
   }
+
+  async logout(request: Request, response: Response) {
+    response.status(200).clearCookie("jwtToken", { httpOnly: true, secure: false }).send();
+  }
 }
 
 export default UserController;

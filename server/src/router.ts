@@ -38,9 +38,13 @@ router.post("/api/login", async (request: Request, response: Response, next: Nex
   return userController.login(request, response, next);
 });
 
+router.get("/api/logout", async (request: Request, response: Response, next: NextFunction) => {
+  return userController.logout(request, response);
+});
+
 router.get("/api/auth", ensureAuthenticated, async (req: Request, res: Response) => {
-  console.log("reached");
-  console.log(req.email);
+  //console.log("reached");
+  //console.log(req.email);
   return res.status(200).send("success");
 });
 

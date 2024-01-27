@@ -1,8 +1,22 @@
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import Avatar from "../../assets/image-avatar.png";
+import { logout } from "../../services/userRequests";
 import { GridIcon, LogoIcon, MovieIcon, TVIcon } from "../Icons";
 
-const Nav = () => {
+interface NavProps {
+  isAuthenticated: boolean;
+  setIsAuthenticated: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const Nav: React.FC<NavProps> = ({ isAuthenticated, setIsAuthenticated }: NavProps) => {
+  const navigate = useNavigate();
+
+  function onClickHandleLogout() {
+    logout();
+    setIsAuthenticated(false);
+    navigate("/");
+  }
+
   return (
     <>
       <nav
@@ -46,9 +60,16 @@ const Nav = () => {
           </NavLink>
         </div>
 
-        <NavLink to="/login" className="lg:mt-auto">
-          <img src={Avatar} className="w-7 h-7 border border-white rounded-full lg:w-8 lg:h-8 cursor-pointer" />
-        </NavLink>
+        <div className="lg:mt-auto flex flex-col-reverse md:flex-row lg:flex-col items-center gap-3">
+          {isAuthenticated && (
+            <p onClick={onClickHandleLogout} className="cursor-pointer">
+              Logout
+            </p>
+          )}
+          <NavLink to="/login">
+            <img src={Avatar} className="w-7 h-7 border border-white rounded-full lg:w-8 lg:h-8 cursor-pointer" />
+          </NavLink>
+        </div>
       </nav>
       <Outlet />
     </>

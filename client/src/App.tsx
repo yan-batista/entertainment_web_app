@@ -11,7 +11,6 @@ import SignUpPage from "./Pages/SignUp";
 import { checkAuth } from "./services/userRequests";
 
 function App() {
-  /* const [cookies, setCookie] = useCookies(["jwt"]); */
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
 
   useEffect(() => {
@@ -20,27 +19,25 @@ function App() {
         await checkAuth();
         setIsAuthenticated(true);
       } catch (error) {
-        console.log(error);
         setIsAuthenticated(false);
       }
     };
 
     tryAuth();
-  }, []);
-  console.log(isAuthenticated);
+  }, [isAuthenticated]);
 
   return (
     <>
       <Router>
         <Routes>
-          <Route element={<Nav />}>
+          <Route element={<Nav isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />}>
             <Route path="/" element={<HomePage />} />
             <Route path="/movies" element={<MoviesPage />} />
             <Route path="/series" element={<SeriesPage />} />
             <Route path="/search" element={<SearchPage />} />
           </Route>
           <Route>
-            <Route path="/login" element={<LoginPage /* setCookie={setCookie} */ />} />
+            <Route path="/login" element={<LoginPage setIsAuthenticated={setIsAuthenticated} />} />
             <Route path="/signup" element={<SignUpPage />} />
           </Route>
         </Routes>
