@@ -1,9 +1,36 @@
+import MediaEntity from "../database/entities/mediaEntity";
 import { UserEntitySelect } from "../database/entities/userEntity";
 import IBookmarkRepository, { InsertResponse } from "../database/repositories/IBookmarkRepository";
 import UserRepository from "../database/repositories/implementations/UserRepository";
 
 class BookmarkServices {
   constructor(private bookmarkRepository: IBookmarkRepository) {}
+
+  async getAllMedia(user_email: string) {
+    // creates user repository
+    const userRepository = new UserRepository();
+
+    /**
+     * tries to get user data through email, and if there is no user found
+     * it should throw an error
+     */
+    let user: UserEntitySelect[];
+    try {
+      user = await userRepository.getUserByEmail(user_email);
+    } catch (error: any) {
+      throw new Error(error.message);
+    }
+    if (user.length <= 0) throw new Error("User not found");
+
+    let resp: MediaEntity[];
+    try {
+      resp = await this.bookmarkRepository.getAllMedia(user[0].id);
+    } catch (error: any) {
+      throw new Error(error.message);
+    }
+
+    return resp;
+  }
 
   /**
    * This is the Add Bookmark service, and its reponsible

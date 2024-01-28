@@ -50,6 +50,10 @@ router.get("/api/auth", ensureAuthenticated, async (req: Request, res: Response)
 });
 
 // Bookmark
+router.get("/api/bookmarked", ensureAuthenticated, async (request: Request, response: Response) => {
+  return bookmarkController.getAllMedia(request, response);
+});
+
 router.post("/api/bookmark/add", ensureAuthenticated, async (request: Request, response: Response) => {
   return bookmarkController.addBookmark(request, response);
 });

@@ -5,7 +5,7 @@ interface MediaEntity {
   category: string;
   rating: string;
   isTrending: boolean;
-  imageURL: string;
+  regularImageURL: string;
+  trendingImageURL: string;
 }
-
 export default MediaEntity;
