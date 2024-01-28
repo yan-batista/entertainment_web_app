@@ -1,7 +1,7 @@
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import Avatar from "../../assets/image-avatar.png";
 import { logout } from "../../services/userRequests";
-import { GridIcon, LogoIcon, MovieIcon, TVIcon } from "../Icons";
+import { BookmarkIcon, GridIcon, LogoIcon, MovieIcon, TVIcon } from "../Icons";
 
 interface NavProps {
   isAuthenticated: boolean;
@@ -58,17 +58,34 @@ const Nav: React.FC<NavProps> = ({ isAuthenticated, setIsAuthenticated }: NavPro
               />
             )}
           </NavLink>
+
+          {isAuthenticated && (
+            <NavLink to="/bookmarked" className={({ isActive }) => (isActive ? "active" : "inactive")}>
+              {({ isActive }) => (
+                <BookmarkIcon
+                  className={`w-5 h-5 lg:w-6 lg:h-6 hover:fill-logo cursor-pointer ${
+                    isActive ? "fill-white" : "fill-icon"
+                  }`}
+                  viewbox="0 0 12 14"
+                ></BookmarkIcon>
+              )}
+            </NavLink>
+          )}
         </div>
 
         <div className="lg:mt-auto flex flex-col-reverse md:flex-row lg:flex-col items-center gap-3">
-          {isAuthenticated && (
-            <p onClick={onClickHandleLogout} className="cursor-pointer">
-              Logout
-            </p>
+          {isAuthenticated ? (
+            <>
+              <p onClick={onClickHandleLogout} className="cursor-pointer">
+                Logout
+              </p>
+              <img src={Avatar} className="w-7 h-7 border border-white rounded-full lg:w-8 lg:h-8" />
+            </>
+          ) : (
+            <NavLink to="/login">
+              <img src={Avatar} className="w-7 h-7 border border-white rounded-full lg:w-8 lg:h-8 cursor-pointer" />
+            </NavLink>
           )}
-          <NavLink to="/login">
-            <img src={Avatar} className="w-7 h-7 border border-white rounded-full lg:w-8 lg:h-8 cursor-pointer" />
-          </NavLink>
         </div>
       </nav>
       <Outlet />
