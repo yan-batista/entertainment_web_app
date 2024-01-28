@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response, Router } from "express";
+import bookmarkController from "./controllers/BookmarkController";
 import mediaController from "./controllers/MediaController";
 import userController from "./controllers/UserController";
 import { ensureAuthenticated } from "./middlewares/ensureAuthenticated";
@@ -46,6 +47,11 @@ router.get("/api/auth", ensureAuthenticated, async (req: Request, res: Response)
   //console.log("reached");
   //console.log(req.email);
   return res.status(200).send("success");
+});
+
+// Bookmark
+router.post("/api/bookmark/add", ensureAuthenticated, async (request: Request, response: Response) => {
+  return bookmarkController.addBookmark(request, response);
 });
 
 export default router;

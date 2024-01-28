@@ -8,3 +8,9 @@ export interface UserEntityDTO {
   password: string;
   confirmPassword: string;
 }
+
+export interface UserEntitySelect {
+  id: number;
+  email: string;
+  password: string;
+}

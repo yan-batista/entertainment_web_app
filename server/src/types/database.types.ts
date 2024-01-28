@@ -60,6 +60,42 @@ export interface Database {
         };
         Relationships: [];
       };
+      UserBookmarked: {
+        Row: {
+          created_at: string;
+          id: number;
+          media_id: number;
+          user_id: number;
+        };
+        Insert: {
+          created_at?: string;
+          id?: number;
+          media_id: number;
+          user_id: number;
+        };
+        Update: {
+          created_at?: string;
+          id?: number;
+          media_id?: number;
+          user_id?: number;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "UserBookmarked_media_id_fkey";
+            columns: ["media_id"];
+            isOneToOne: false;
+            referencedRelation: "Media";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "UserBookmarked_user_id_fkey";
+            columns: ["user_id"];
+            isOneToOne: false;
+            referencedRelation: "User";
+            referencedColumns: ["id"];
+          }
+        ];
+      };
     };
     Views: {
       [_ in never]: never;

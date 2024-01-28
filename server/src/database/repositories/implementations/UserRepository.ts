@@ -1,5 +1,5 @@
 import getSupabaseConnection from "../../config";
-import { UserEntity } from "../../entities/userEntity";
+import { UserEntity, UserEntitySelect } from "../../entities/userEntity";
 import IUserRepository from "../IUserRepository";
 
 class UserRepository implements IUserRepository {
@@ -8,7 +8,7 @@ class UserRepository implements IUserRepository {
     this.client = getSupabaseConnection();
   }
 
-  async getUserByEmail(email: string): Promise<UserEntity[]> {
+  async getUserByEmail(email: string): Promise<UserEntitySelect[]> {
     const { data, error } = await this.client.from("User").select().eq("email", email);
     if (error) throw new Error(error.message);
     return data;
