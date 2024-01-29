@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { LogoIcon } from "../Components/Icons";
+import { useAuth } from "../contexts/userAuthContext";
 import { loginService } from "../services/userRequests";
 
 interface LoginPageError {
@@ -8,13 +9,15 @@ interface LoginPageError {
   exists: boolean;
 }
 
-interface LoginPageProps {
-  setIsAuthenticated: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-const LoginPage: React.FC<LoginPageProps> = ({ setIsAuthenticated }: LoginPageProps) => {
-  const navigate = useNavigate();
+const LoginPage = () => {
   const [error, setError] = useState<LoginPageError>({ message: "", exists: false });
+  const navigate = useNavigate();
+
+  const { isAuthenticated, login, checkIfUserIsAuth } = useAuth();
+
+  useEffect(() => {
+    checkIfUserIsAuth({ onSuccess: () => navigate("/") });
+  }, [isAuthenticated]);
 
   async function onSubmitLogin(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -27,8 +30,8 @@ const LoginPage: React.FC<LoginPageProps> = ({ setIsAuthenticated }: LoginPagePr
 
     if (user_email && user_password) {
       try {
-        await loginService(user_email.value, user_password.value); // sets token as cookie
-        setIsAuthenticated(true);
+        login();
+        await loginService(user_email.value, user_password.value);
         navigate("/");
       } catch (error: any) {
         setError({

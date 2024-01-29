@@ -33,7 +33,9 @@ class UserController {
 
     try {
       const token = await this.userService.login(user);
-      response.status(200).cookie("jwtToken", token, { httpOnly: true, secure: false }).send();
+      const expirationTime = new Date();
+      expirationTime.setDate(expirationTime.getDate() + 1);
+      response.status(200).cookie("jwtToken", token, { httpOnly: true, secure: false, expires: expirationTime }).send();
     } catch (error) {
       console.log(error);
       next(error);

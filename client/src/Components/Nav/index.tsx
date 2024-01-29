@@ -1,19 +1,21 @@
+import { useEffect } from "react";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import Avatar from "../../assets/image-avatar.png";
-import { logout } from "../../services/userRequests";
+import { useAuth } from "../../contexts/userAuthContext";
+import { logoutService } from "../../services/userRequests";
 import { BookmarkIcon, GridIcon, LogoIcon, MovieIcon, TVIcon } from "../Icons";
 
-interface NavProps {
-  isAuthenticated: boolean;
-  setIsAuthenticated: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-const Nav: React.FC<NavProps> = ({ isAuthenticated, setIsAuthenticated }: NavProps) => {
+const Nav = () => {
   const navigate = useNavigate();
+  const { isAuthenticated, logout, checkIfUserIsAuth } = useAuth();
 
-  function onClickHandleLogout() {
-    logout();
-    setIsAuthenticated(false);
+  useEffect(() => {
+    checkIfUserIsAuth({});
+  }, [isAuthenticated]);
+
+  async function onClickHandleLogout() {
+    logout(); // change state on client side
+    logoutService(); // server side
     navigate("/");
   }
 

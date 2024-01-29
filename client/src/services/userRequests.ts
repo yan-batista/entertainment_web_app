@@ -27,7 +27,7 @@ export async function checkAuth() {
   }
 }
 
-export async function logout() {
+export async function logoutService() {
   try {
     await api.get("/logout", { withCredentials: true });
   } catch (error: any) {
