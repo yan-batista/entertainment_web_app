@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { LogoIcon } from "../Components/Icons";
 import { useAuth } from "../contexts/userAuthContext";
@@ -13,11 +13,7 @@ const LoginPage = () => {
   const [error, setError] = useState<LoginPageError>({ message: "", exists: false });
   const navigate = useNavigate();
 
-  const { isAuthenticated, login, checkIfUserIsAuth } = useAuth();
-
-  useEffect(() => {
-    checkIfUserIsAuth({ onSuccess: () => navigate("/") });
-  }, [isAuthenticated]);
+  const { login } = useAuth();
 
   async function onSubmitLogin(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();

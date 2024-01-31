@@ -1,4 +1,5 @@
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
+import CheckAuthentication from "./Components/CheckAuthentication";
 import Nav from "./Components/Nav";
 import BookmarkedPage from "./Pages/Bookmarked";
 import HomePage from "./Pages/Home";
@@ -9,24 +10,70 @@ import SeriesPage from "./Pages/Series";
 import SignUpPage from "./Pages/SignUp";
 
 function App() {
+  const navigate = useNavigate();
   return (
-    <>
-      <Router>
-        <Routes>
-          <Route element={<Nav />}>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/movies" element={<MoviesPage />} />
-            <Route path="/series" element={<SeriesPage />} />
-            <Route path="/search" element={<SearchPage />} />
-            <Route path="/bookmarked" element={<BookmarkedPage />} />
-          </Route>
-          <Route>
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/signup" element={<SignUpPage />} />
-          </Route>
-        </Routes>
-      </Router>
-    </>
+    <Routes>
+      <Route element={<Nav />}>
+        <Route
+          path="/"
+          element={
+            <CheckAuthentication>
+              <HomePage />
+            </CheckAuthentication>
+          }
+        />
+        <Route
+          path="/movies"
+          element={
+            <CheckAuthentication>
+              <MoviesPage />
+            </CheckAuthentication>
+          }
+        />
+        <Route
+          path="/series"
+          element={
+            <CheckAuthentication>
+              <SeriesPage />
+            </CheckAuthentication>
+          }
+        />
+        <Route
+          path="/search"
+          element={
+            <CheckAuthentication>
+              <SearchPage />
+            </CheckAuthentication>
+          }
+        />
+        <Route
+          path="/bookmarked"
+          element={
+            <CheckAuthentication onError={() => navigate("/login")}>
+              <BookmarkedPage />
+            </CheckAuthentication>
+          }
+        />
+      </Route>
+      <Route>
+        <Route
+          path="/login"
+          element={
+            <CheckAuthentication onSuccess={() => navigate("/")}>
+              <LoginPage />
+            </CheckAuthentication>
+          }
+        />
+        <Route
+          path="/signup"
+          element={
+            <CheckAuthentication onSuccess={() => navigate("/")}>
+              <SignUpPage />
+            </CheckAuthentication>
+          }
+        />
+      </Route>
+    </Routes>
   );
 }
 

@@ -55,7 +55,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       }
     } catch (err) {
       logout();
-      console.log(err);
       if (onError) {
         onError();
       }
