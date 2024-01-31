@@ -2,12 +2,14 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import Card from "../Components/Card";
 import SearchBar from "../Components/SearchBar";
+import { useAuth } from "../contexts/userAuthContext";
 import { getMediaByName } from "../services/mediaRequests";
 import { MediaEntity } from "../types/CardType";
 
 const SearchPage = () => {
   const [results, setResults] = useState<MediaEntity[]>([]);
   const [searchParams] = useSearchParams();
+  const { isAuthenticated } = useAuth();
 
   /*
    * this function will get the params from the route
@@ -48,6 +50,7 @@ const SearchPage = () => {
               type={item.category}
               advisory_rating={item.rating}
               name={item.title}
+              bookmarkVisible={isAuthenticated}
             ></Card>
           );
         })}

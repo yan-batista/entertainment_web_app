@@ -3,11 +3,13 @@ import Card from "../Components/Card";
 import Carrousel from "../Components/Carrousel";
 import SearchBar from "../Components/SearchBar";
 
+import { useAuth } from "../contexts/userAuthContext";
 import { getAllMediaApi } from "../services/mediaRequests";
 import { MediaEntity } from "../types/CardType";
 
 const HomePage = () => {
   const [media, setMedia] = useState<MediaEntity[]>([]);
+  const { isAuthenticated } = useAuth();
 
   /*
    * This function will get all the movies/series sorted by title.
@@ -43,6 +45,7 @@ const HomePage = () => {
             advisory_rating={item.rating}
             name={item.title}
             trending
+            bookmarkVisible={isAuthenticated}
           ></Card>
         );
       }

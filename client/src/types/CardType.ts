@@ -5,6 +5,7 @@ export interface CardProps {
   advisory_rating: string;
   name: string;
   trending?: boolean;
+  bookmarkVisible?: boolean;
 }
 
 export interface MediaEntity {

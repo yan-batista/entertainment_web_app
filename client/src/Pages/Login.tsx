@@ -22,9 +22,9 @@ const LoginPage = () => {
     const user_email: HTMLInputElement | null = formTarget.querySelector("#user_email");
     const user_password: HTMLInputElement | null = formTarget.querySelector("#user_password");
 
-    // validade data
-
+    // if both fields exists
     if (user_email && user_password) {
+      // Make a login request
       try {
         login();
         await loginService(user_email.value, user_password.value);

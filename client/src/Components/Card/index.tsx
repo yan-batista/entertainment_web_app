@@ -2,7 +2,15 @@ import { useState } from "react";
 import { CardProps } from "../../types/CardType";
 import { BookmarkIcon, BookmarkIconActive, MovieIcon, PlayIcon, TVIcon } from "../Icons";
 
-const Card: React.FC<CardProps> = ({ image, year, type, advisory_rating, name, trending = false }: CardProps) => {
+const Card: React.FC<CardProps> = ({
+  image,
+  year,
+  type,
+  advisory_rating,
+  name,
+  trending = false,
+  bookmarkVisible = false,
+}: CardProps) => {
   const [bookmarked, setBookmarked] = useState<boolean>(false);
 
   const getCardSize = () => {
@@ -30,7 +38,7 @@ const Card: React.FC<CardProps> = ({ image, year, type, advisory_rating, name, t
           className="absolute top-0 left-0 w-full h-full bg-black/20 group-hover/play:bg-black/60 duration-200"
         ></div>
         <div
-          className="absolute top-2 right-2 border border-black/30 bg-black/30 rounded-full p-2 hover:border-white hover:bg-white group/icon duration-500 cursor-pointer z-10"
+          className={`absolute top-2 right-2 border border-black/30 bg-black/30 rounded-full p-2 hover:border-white hover:bg-white group/icon duration-500 cursor-pointer z-10 ${bookmarkVisible ? "visible" : "invisible"}`}
           onClick={onClickSetBookmarked}
         >
           {bookmarked && (

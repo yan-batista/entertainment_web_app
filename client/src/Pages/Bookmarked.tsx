@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 import Card from "../Components/Card";
 import SearchBar from "../Components/SearchBar";
+import { useAuth } from "../contexts/userAuthContext";
 import { getAllBookmarkedMedia } from "../services/bookmarkedRequests";
 import { MediaEntity } from "../types/CardType";
 
 const BookmarkedPage = () => {
   const [media, setMedia] = useState<MediaEntity[]>([]);
+  const { isAuthenticated } = useAuth();
+
   /*
    * This function will filter the bookmarked media, putting them in order
    *
@@ -35,6 +38,7 @@ const BookmarkedPage = () => {
               type={item.category}
               advisory_rating={item.rating}
               name={item.title}
+              bookmarkVisible={isAuthenticated}
             ></Card>
           );
         })}

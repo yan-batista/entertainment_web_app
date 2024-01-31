@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import Card from "../Components/Card";
 import SearchBar from "../Components/SearchBar";
+import { useAuth } from "../contexts/userAuthContext";
 import { getAllMovies } from "../services/mediaRequests";
 import { MediaEntity } from "../types/CardType";
 
 const MoviesPage = () => {
   const [movies, setMovies] = useState<MediaEntity[]>([]);
+  const { isAuthenticated } = useAuth();
 
   /*
    * This function will filter the data, getting only objects that
@@ -37,6 +39,7 @@ const MoviesPage = () => {
               type={item.category}
               advisory_rating={item.rating}
               name={item.title}
+              bookmarkVisible={isAuthenticated}
             ></Card>
           );
         })}
