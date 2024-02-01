@@ -6,12 +6,12 @@ class UserController {
   constructor(private userService: UserService) {}
 
   async signup(request: Request, response: Response, next: NextFunction) {
-    const { email, password, confirmPassword } = request.body;
+    const { email, password, confirm_password } = request.body;
 
     const userData: UserEntityDTO = {
       email: email,
       password: password,
-      confirmPassword: confirmPassword,
+      confirmPassword: confirm_password,
     };
 
     try {

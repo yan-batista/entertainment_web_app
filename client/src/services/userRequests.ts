@@ -36,3 +36,15 @@ export async function logoutService() {
     }
   }
 }
+
+export async function signupService(user_email: string, user_password: string, user_confirm_password: string) {
+  try {
+    await api.post("/signup", {
+      email: user_email,
+      password: user_password,
+      confirm_password: user_confirm_password,
+    });
+  } catch (error: any) {
+    if (error.response) throw new Error(error.response.data.error);
+  }
+}

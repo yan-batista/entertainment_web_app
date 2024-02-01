@@ -30,7 +30,6 @@ router.get("/api/search", async (request: Request, response: Response, next: Nex
 // Users
 // sign up
 router.post("/api/signup", async (request: Request, response: Response, next: NextFunction) => {
-  const token = userController.signup(request, response, next);
   return userController.signup(request, response, next);
 });
 
@@ -39,10 +38,12 @@ router.post("/api/login", async (request: Request, response: Response, next: Nex
   return userController.login(request, response, next);
 });
 
+// logout
 router.get("/api/logout", async (request: Request, response: Response, next: NextFunction) => {
   return userController.logout(request, response);
 });
 
+// checks if user is authenticated
 router.get("/api/auth", ensureAuthenticated, async (req: Request, res: Response) => {
   //console.log("reached");
   //console.log(req.email);
@@ -54,6 +55,7 @@ router.get("/api/bookmarked", ensureAuthenticated, async (request: Request, resp
   return bookmarkController.getAllMedia(request, response);
 });
 
+// add bookmark
 router.post("/api/bookmark/add", ensureAuthenticated, async (request: Request, response: Response) => {
   return bookmarkController.addBookmark(request, response);
 });
