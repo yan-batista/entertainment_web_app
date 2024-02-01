@@ -16,8 +16,7 @@ const app: Express = express();
 // cors
 app.use(
   cors({
-    /* origin: "https://entertainment-web-app-seven-kappa.vercel.app", */
-    origin: "http://localhost:5173",
+    origin: "https://entertainment-web-app-seven-kappa.vercel.app",
     credentials: true,
   })
 );

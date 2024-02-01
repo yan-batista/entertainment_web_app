@@ -30,11 +30,17 @@ Users should be able to:
 ### Screenshot
 
 <p align="center" >
+  <img src="./screenshots/home.png" />
+  <img src="./screenshots/bookmarked.png" />
+  <img src="./screenshots/login.png" />
+  <img src="./screenshots/home_mobile.png" />
+  <img src="./screenshots/bookmarked_mobile.png" />
+  <img src="./screenshots/login_mobile.png" />
 </p>
 
 ### Links
 
-- [Live Site]()
+- [Live Site](https://entertainment-web-app-seven-kappa.vercel.app/)
 
 ## My process
 
@@ -42,9 +48,10 @@ Users should be able to:
 
 - [React](https://reactjs.org/) - JS library
 - [Tailwindcss](https://tailwindcss.com/) - For styles
-- Typescript
-
-### What I learned
+- [Typescript] (https://www.typescriptlang.org/)
+- [NodeJS](https://nodejs.org/en)
+- [Express](https://expressjs.com/)
+- [Supabase](https://supabase.com/)
 
 ## Author
 
