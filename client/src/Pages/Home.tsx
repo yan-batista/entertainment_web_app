@@ -3,6 +3,7 @@ import Card from "../Components/Card";
 import Carrousel from "../Components/Carrousel";
 import SearchBar from "../Components/SearchBar";
 
+import { useBookmark } from "../contexts/bookmarkContext";
 import { useAuth } from "../contexts/userAuthContext";
 import { getAllMediaApi } from "../services/mediaRequests";
 import { MediaEntity } from "../types/CardType";
@@ -10,6 +11,7 @@ import { MediaEntity } from "../types/CardType";
 const HomePage = () => {
   const [media, setMedia] = useState<MediaEntity[]>([]);
   const { isAuthenticated } = useAuth();
+  const { bookmarkedListLoaded, getBookmarked, checkIfBookmarked } = useBookmark();
 
   /*
    * This function will get all the movies/series sorted by title.
@@ -23,6 +25,7 @@ const HomePage = () => {
       setMedia(sortedData);
     };
 
+    getBookmarked();
     fetchMedia();
   }, []);
 
@@ -47,6 +50,7 @@ const HomePage = () => {
             name={item.title}
             trending
             bookmarkVisible={isAuthenticated}
+            isBookmarked={checkIfBookmarked(item)}
           ></Card>
         );
       }
@@ -72,6 +76,8 @@ const HomePage = () => {
             type={item.category}
             advisory_rating={item.rating}
             name={item.title}
+            bookmarkVisible={isAuthenticated}
+            isBookmarked={checkIfBookmarked(item)}
           ></Card>
         );
       }
@@ -87,12 +93,14 @@ const HomePage = () => {
 
         <section className="md:-mx-8 lg:ml-2 ">
           <h1 className="text-xl font-light my-6 px-4 md:text-3xl">Trending</h1>
-          <Carrousel>{getAllTrendingImageCards()}</Carrousel>
+          <Carrousel>{bookmarkedListLoaded && getAllTrendingImageCards()}</Carrousel>
         </section>
 
         <section className="mx-4 md:-mx-2 lg:ml-6 lg:max-w-full">
           <h1 className="text-xl font-light my-6 md:text-3xl">Recommended For You</h1>
-          <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">{getAllRegularImageCards()}</div>
+          <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
+            {bookmarkedListLoaded && getAllRegularImageCards()}
+          </div>
         </section>
       </section>
     </>

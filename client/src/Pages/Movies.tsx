@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Card from "../Components/Card";
 import SearchBar from "../Components/SearchBar";
+import { useBookmark } from "../contexts/bookmarkContext";
 import { useAuth } from "../contexts/userAuthContext";
 import { getAllMovies } from "../services/mediaRequests";
 import { MediaEntity } from "../types/CardType";
@@ -8,6 +9,7 @@ import { MediaEntity } from "../types/CardType";
 const MoviesPage = () => {
   const [movies, setMovies] = useState<MediaEntity[]>([]);
   const { isAuthenticated } = useAuth();
+  const { bookmarkedListLoaded, getBookmarked, checkIfBookmarked } = useBookmark();
 
   /*
    * This function will filter the data, getting only objects that
@@ -22,6 +24,7 @@ const MoviesPage = () => {
       setMovies(sortedData);
     };
 
+    getBookmarked();
     fetchData();
   }, []);
 
@@ -30,20 +33,22 @@ const MoviesPage = () => {
       <SearchBar placeholder="Search for movies" filterType="movie" />
       <h1 className="text-xl font-light my-6 md:text-3xl">Movies</h1>
       <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
-        {movies.map((item) => {
-          return (
-            <Card
-              key={item.title}
-              itemId={item.id}
-              image={item.regularImageURL}
-              year={item.year}
-              type={item.category}
-              advisory_rating={item.rating}
-              name={item.title}
-              bookmarkVisible={isAuthenticated}
-            ></Card>
-          );
-        })}
+        {bookmarkedListLoaded &&
+          movies.map((item) => {
+            return (
+              <Card
+                key={item.title}
+                itemId={item.id}
+                image={item.regularImageURL}
+                year={item.year}
+                type={item.category}
+                advisory_rating={item.rating}
+                name={item.title}
+                bookmarkVisible={isAuthenticated}
+                isBookmarked={checkIfBookmarked(item)}
+              ></Card>
+            );
+          })}
       </div>
     </section>
   );

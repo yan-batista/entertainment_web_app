@@ -7,6 +7,7 @@ export interface CardProps {
   name: string;
   trending?: boolean;
   bookmarkVisible?: boolean;
+  isBookmarked: boolean;
 }
 
 export interface MediaEntity {

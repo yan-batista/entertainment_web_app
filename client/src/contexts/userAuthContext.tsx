@@ -1,5 +1,5 @@
 // AuthProvider.tsx
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useState } from "react";
 import { checkAuth } from "../services/userRequests";
 
 // Define the type for authentication context
@@ -30,11 +30,7 @@ type AuthProviderProps = {
 };
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(localStorage.getItem("isAuthenticated") === "true");
-
-  useEffect(() => {
-    localStorage.setItem("isAuthenticated", isAuthenticated.toString());
-  }, [isAuthenticated]);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
 
   const login = () => {
     setIsAuthenticated(true);

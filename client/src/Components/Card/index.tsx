@@ -12,8 +12,9 @@ const Card: React.FC<CardProps> = ({
   name,
   trending = false,
   bookmarkVisible = false,
+  isBookmarked,
 }: CardProps) => {
-  const [bookmarked, setBookmarked] = useState<boolean>(false);
+  const [bookmarked, setBookmarked] = useState<boolean>(isBookmarked);
 
   const getCardSize = () => {
     if (trending) return "w-[15rem] h-[8rem] mobile-l:w-[24rem] mobile-l:h-[12rem] md:w-[30rem] md:h-[15rem]";
