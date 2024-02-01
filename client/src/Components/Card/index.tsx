@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { addBookmark, removeBookmark } from "../../services/bookmarkedRequests";
 import { CardProps } from "../../types/CardType";
+import capitalizeWords from "../../utils/capitalize";
 import { BookmarkIcon, BookmarkIconActive, MovieIcon, PlayIcon, TVIcon } from "../Icons";
 
 const Card: React.FC<CardProps> = ({
@@ -43,13 +44,6 @@ const Card: React.FC<CardProps> = ({
         console.error(error.message);
       }
     }
-  }
-
-  function capitalizeWords(str: string): string {
-    return str
-      .split(" ")
-      .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
-      .join(" ");
   }
 
   return (

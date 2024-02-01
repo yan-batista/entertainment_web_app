@@ -28,27 +28,30 @@ const SeriesPage = () => {
     fetchData();
   }, []);
 
+  function getAllSeriesData() {
+    return series.map((item) => {
+      return (
+        <Card
+          itemId={item.id}
+          key={item.title}
+          image={item.regularImageURL}
+          year={item.year}
+          type={item.category}
+          advisory_rating={item.rating}
+          name={item.title}
+          bookmarkVisible={isAuthenticated}
+          isBookmarked={checkIfBookmarked(item)}
+        ></Card>
+      );
+    });
+  }
+
   return (
     <section className="flex-grow mx-4 pt-8 md:mx-1 lg:ml-6">
       <SearchBar placeholder="Search for series" filterType="tv-series" />
       <h1 className="text-xl font-light my-6 md:text-3xl">Series</h1>
       <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
-        {bookmarkedListLoaded &&
-          series.map((item) => {
-            return (
-              <Card
-                itemId={item.id}
-                key={item.title}
-                image={item.regularImageURL}
-                year={item.year}
-                type={item.category}
-                advisory_rating={item.rating}
-                name={item.title}
-                bookmarkVisible={isAuthenticated}
-                isBookmarked={checkIfBookmarked(item)}
-              ></Card>
-            );
-          })}
+        {isAuthenticated ? bookmarkedListLoaded && getAllSeriesData() : getAllSeriesData()}
       </div>
     </section>
   );

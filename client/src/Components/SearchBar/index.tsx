@@ -50,6 +50,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ placeholder, filterType }: Search
     <form
       className="flex flex-row items-center w-full gap-4 relative"
       onSubmit={(event) => onSubmitSearchMedia(event, filterType)}
+      autoComplete="off"
     >
       <SearchIcon className="w-6 h-6" viewbox={"0 0 32 32"} fill="white" />
       <input

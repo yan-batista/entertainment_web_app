@@ -6,6 +6,7 @@ import { useBookmark } from "../contexts/bookmarkContext";
 import { useAuth } from "../contexts/userAuthContext";
 import { getMediaByName } from "../services/mediaRequests";
 import { MediaEntity } from "../types/CardType";
+import capitalizeWords from "../utils/capitalize";
 
 const SearchPage = () => {
   const [results, setResults] = useState<MediaEntity[]>([]);
@@ -37,29 +38,34 @@ const SearchPage = () => {
     fetchData();
   }, [searchParams]);
 
+  function getAllSearchData() {
+    return results.map((item) => {
+      return (
+        <Card
+          itemId={item.id}
+          key={item.title}
+          image={item.regularImageURL}
+          year={item.year}
+          type={item.category}
+          advisory_rating={item.rating}
+          name={item.title}
+          bookmarkVisible={isAuthenticated}
+          isBookmarked={checkIfBookmarked(item)}
+        ></Card>
+      );
+    });
+  }
+
   return (
     <section className="flex-grow mx-4 pt-8 md:mx-1 lg:ml-6">
-      <SearchBar placeholder="Search for movies" />
+      <SearchBar
+        placeholder={`Search for ${capitalizeWords(searchParams.get("category")?.replace(/-/g, " ") || "Media")}`}
+      />
       <h1 className="text-xl font-light my-6 md:text-3xl">
         Found {results.length} results for "{searchParams.get("title")}"
       </h1>
       <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
-        {bookmarkedListLoaded &&
-          results.map((item) => {
-            return (
-              <Card
-                itemId={item.id}
-                key={item.title}
-                image={item.regularImageURL}
-                year={item.year}
-                type={item.category}
-                advisory_rating={item.rating}
-                name={item.title}
-                bookmarkVisible={isAuthenticated}
-                isBookmarked={checkIfBookmarked(item)}
-              ></Card>
-            );
-          })}
+        {isAuthenticated ? bookmarkedListLoaded && getAllSearchData() : getAllSearchData()}
       </div>
     </section>
   );

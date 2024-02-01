@@ -93,13 +93,15 @@ const HomePage = () => {
 
         <section className="md:-mx-8 lg:ml-2 ">
           <h1 className="text-xl font-light my-6 px-4 md:text-3xl">Trending</h1>
-          <Carrousel>{bookmarkedListLoaded && getAllTrendingImageCards()}</Carrousel>
+          <Carrousel>
+            {isAuthenticated ? bookmarkedListLoaded && getAllTrendingImageCards() : getAllTrendingImageCards()}
+          </Carrousel>
         </section>
 
         <section className="mx-4 md:-mx-2 lg:ml-6 lg:max-w-full">
           <h1 className="text-xl font-light my-6 md:text-3xl">Recommended For You</h1>
           <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
-            {bookmarkedListLoaded && getAllRegularImageCards()}
+            {isAuthenticated ? bookmarkedListLoaded && getAllRegularImageCards() : getAllRegularImageCards()}
           </div>
         </section>
       </section>
