@@ -46,7 +46,7 @@ class UserController {
   }
 
   async logout(request: Request, response: Response) {
-    response.status(200).clearCookie("jwtToken", { httpOnly: true, secure: false, sameSite: "none" }).send();
+    response.status(200).clearCookie("jwtToken", { httpOnly: true, secure: true, sameSite: "none" }).send();
   }
 }
 
