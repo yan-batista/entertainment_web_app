@@ -18,6 +18,8 @@ class BookmarkController {
   }
 
   async addBookmark(request: Request, response: Response) {
+    console.log("add bookmark");
+    console.log(request.body);
     const media_id = request.body.media_id;
     let resp: InsertResponse;
     try {
@@ -27,6 +29,17 @@ class BookmarkController {
     }
 
     return response.status(resp.status).send(resp.statusText);
+  }
+
+  async removeBookmark(request: Request, response: Response) {
+    const media_id = request.body.media_id;
+    try {
+      await this.bookmarkService.removeBookmark(request.email, media_id);
+    } catch (error: any) {
+      throw new Error(error.message);
+    }
+
+    return response.status(204).send();
   }
 }
 

@@ -45,8 +45,6 @@ router.get("/api/logout", async (request: Request, response: Response, next: Nex
 
 // checks if user is authenticated
 router.get("/api/auth", ensureAuthenticated, async (req: Request, res: Response) => {
-  //console.log("reached");
-  //console.log(req.email);
   return res.status(200).send("success");
 });
 
@@ -58,6 +56,11 @@ router.get("/api/bookmarked", ensureAuthenticated, async (request: Request, resp
 // add bookmark
 router.post("/api/bookmark/add", ensureAuthenticated, async (request: Request, response: Response) => {
   return bookmarkController.addBookmark(request, response);
+});
+
+// remove bookmark
+router.delete("/api/bookmark/remove", ensureAuthenticated, async (request: Request, response: Response) => {
+  return bookmarkController.removeBookmark(request, response);
 });
 
 export default router;

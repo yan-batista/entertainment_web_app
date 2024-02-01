@@ -1,4 +1,5 @@
 export interface CardProps {
+  itemId: number;
   image: string;
   year: number;
   type: string;

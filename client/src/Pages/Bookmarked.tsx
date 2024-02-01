@@ -32,6 +32,7 @@ const BookmarkedPage = () => {
         {media.map((item) => {
           return (
             <Card
+              itemId={item.id}
               key={item.title}
               image={item.regularImageURL}
               year={item.year}

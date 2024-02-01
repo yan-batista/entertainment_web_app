@@ -34,6 +34,7 @@ const MoviesPage = () => {
           return (
             <Card
               key={item.title}
+              itemId={item.id}
               image={item.regularImageURL}
               year={item.year}
               type={item.category}

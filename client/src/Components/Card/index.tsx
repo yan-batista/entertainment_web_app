@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { addBookmark, removeBookmark } from "../../services/bookmarkedRequests";
 import { CardProps } from "../../types/CardType";
 import { BookmarkIcon, BookmarkIconActive, MovieIcon, PlayIcon, TVIcon } from "../Icons";
 
 const Card: React.FC<CardProps> = ({
+  itemId,
   image,
   year,
   type,
@@ -18,8 +20,28 @@ const Card: React.FC<CardProps> = ({
     else return "w-full/2";
   };
 
-  function onClickSetBookmarked() {
-    setBookmarked((prevState) => !prevState);
+  async function onClickSetBookmarked() {
+    if (bookmarked) {
+      setBookmarked(false); // client
+      /**
+       * Make request to the backend to remove bookmarked for the user
+       */
+      try {
+        await removeBookmark(itemId);
+      } catch (error: any) {
+        console.error(error.message);
+      }
+    } else {
+      setBookmarked(true); // client
+      /**
+       * Make request to the backend to save as bookmarked for the user
+       */
+      try {
+        await addBookmark(itemId);
+      } catch (error: any) {
+        console.error(error.message);
+      }
+    }
   }
 
   function capitalizeWords(str: string): string {

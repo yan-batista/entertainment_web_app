@@ -14,6 +14,7 @@ interface IPayload {
  */
 export function ensureAuthenticated(request: Request, response: Response, next: NextFunction) {
   const authToken = request.cookies.jwtToken;
+  console.log(authToken);
   if (!authToken) return response.status(401).end();
 
   try {

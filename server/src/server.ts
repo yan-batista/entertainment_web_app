@@ -21,6 +21,7 @@ app.use(
     credentials: true,
   })
 );
+app.options("*", cors());
 
 // Routes
 app.use(express.json());

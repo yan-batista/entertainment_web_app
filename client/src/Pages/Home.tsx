@@ -38,6 +38,7 @@ const HomePage = () => {
       if (item.isTrending) {
         return (
           <Card
+            itemId={item.id}
             key={`${item.title}_$${index}`}
             image={item.trendingImageURL}
             year={item.year}
@@ -64,6 +65,7 @@ const HomePage = () => {
       if (!item.isTrending) {
         return (
           <Card
+            itemId={item.id}
             key={`${item.title}_$${index}`}
             image={item.regularImageURL}
             year={item.year}

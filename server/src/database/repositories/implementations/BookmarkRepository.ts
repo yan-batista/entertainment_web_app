@@ -39,8 +39,9 @@ class BookMarkRepository implements IBookmarkRepository {
     return { status, statusText };
   }
 
-  removeBookmark(user_id: number, media_id: number): Promise<void> {
-    throw new Error("Method not implemented.");
+  async removeBookmark(user_id: number, media_id: number): Promise<void> {
+    const { error } = await this.client.from("UserBookmarked").delete().eq("media_id", media_id).eq("user_id", user_id);
+    if (error) throw new Error(error.message);
   }
 }
 
